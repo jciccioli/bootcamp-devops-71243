@@ -1,0 +1,31 @@
+#    Desafio 3
+#script para creacion de usuarios
+
+
+groupadd desarrollo
+logger -p sylog.info "Groupadd desarrollo - Se creo grupo desarrollo" 
+
+groupadd operaciones
+logger -p sylog.info "Groupadd desarrollo - Se creo grupo operaciones" 
+
+groupadd ingenieria
+logger -p sylog.info "Groupadd desarrollo - Se creo grupo ingenieria" 
+
+useradd -m gfernandez -p fer651ge32 -g desarrollo
+logger -p sylog.info "Useradd gfernandez - Se creo usuario gfernandez" 
+
+useradd -m jmendez -p fg16f8we2f -g desarrollo
+logger -p sylog.info "Useradd jmendez - Se creo usuario jmendez" 
+
+useradd -m pquiroga -p g16e5r1g3r -g operaciones
+logger -p sylog.info "Useradd pquiroga - Se creo usuario pquiroga" 
+
+useradd -m icoca -p 65rf1gedfg61 -g operaciones
+logger -p sylog.info "Useradd icoca - Se creo usuario icoca" 
+
+useradd -m jfruta -p 1g6e5r1g3wry -g ingenieria
+logger -p sylog.info "Useradd icoca - Se creo usuario icoca" 
+
+useradd -m camarillo -p th6wik5jsw8 -g ingenieria
+logger -p sylog.info "Useradd icoca - Se creo usuario icoca" 
+
