@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+    stages {
+        stages ('Checkout') {
+            steps{
+                echo "Verificando Branch y Repo"
+                git branch: 'develop', url: 'https://github.com/jciccioli/bootcamp-devops-71243.git'
+            }
+          
+        }
+        stages ('Deploy') {
+
+           steps {
+            echo "Copiando archivos en Apache"
+            //Copiar archivos a web server
+            
+            sh 'scp -o StrictHostkeyChecking=no -r * jciccioli@192.168.100.99:/var/www/html/'
+           }
+            
+
+        }
+    }
+}
