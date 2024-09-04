@@ -11,7 +11,7 @@ pipeline {
                 sh 'echo "Verificando instalación de Apache"'
                 sshagent(['ssh-credential-id']) {
                     sh '''
-                        ssh -o StrictHostKeyChecking=no facu@192.168.100.20
+                        ssh -o StrictHostKeyChecking=no facu@192.168.100.99
                     '''}
                 sh '''#!/bin/bash
                 status=$(systemctl is-active apache2)
