@@ -1,23 +1,41 @@
 pipeline {
     agent any
     stages {
-        stages ('Checkout') {
-            steps{
-                echo "Verificando Branch y Repo"
-                git branch: 'develop', url: 'https://github.com/jciccioli/bootcamp-devops-71243.git'
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/FacuMiglio/bootcamp-devops-desafio6.git'
             }
-          
         }
-        stages ('Deploy') {
-
-           steps {
-            echo "Copiando archivos en Apache"
-            //Copiar archivos a web server
-            
-            sh 'scp -o StrictHostkeyChecking=no -r * jciccioli@192.168.100.99:/var/www/html/'
-           }
-            
-
+        stage('Check Apache') {
+            steps {
+                sh 'echo "Verificando instalación de Apache"'
+                sshagent(['ssh-credential-id']) {
+                    sh '''
+                        ssh -o StrictHostKeyChecking=no facu@192.168.100.20
+                    '''}
+                sh '''#!/bin/bash
+                status=$(systemctl is-active apache2)
+                    
+ 
+ 
+                if ( "$status" == "active" ){
+                    echo "Apache2 está corriendo."
+                    }
+                else {
+                    echo "Apache2 no está corriendo."
+                    echo "Instalando Apache2"
+                    sudo apt update -y
+                    sudo apt install apache2 -y
+                    sudo systemctl stop apache2
+                    sudo systemctl enable apache2
+                }'''
+  
+                }
+            }
+        stage('Deploy to Apache') {
+            steps {
+                sh 'echo "<h1>Hello from Jenkins Pipeline 31/08/2024 22:46</h1> " '
+            }
         }
     }
 }
